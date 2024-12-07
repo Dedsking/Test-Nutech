@@ -33,7 +33,7 @@ router.get("/profile", middlewareAuth, membership.profile);
 router.put("/profile/update", middlewareAuth, membership.profile_update);
 
 //Route untuk profile update image
-router.post(
+router.put(
   "/profile/image",
   middlewareAuth,
   upload.single("file"),

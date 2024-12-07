@@ -158,6 +158,15 @@ const transaction = async (req, res) => {
     }
 
     const service = checkService[0];
+    const profile = check[0];
+
+    if (profile.balance < service.service_tarif) {
+      return res.status(400).json({
+        status: 400,
+        message: "Balance tidak cukup untuk melakukan transaksi",
+        data: null,
+      });
+    }
 
     // masukkan transaksi ke table transaction
     const transaction_payment = await transactionModel.insertTransactionPayment(
@@ -171,8 +180,6 @@ const transaction = async (req, res) => {
         data: null,
       });
     }
-
-    const profile = check[0];
 
     //perhitungan balance
     const result = profile.balance - service.service_tarif;
