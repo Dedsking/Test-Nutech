@@ -1,7 +1,7 @@
 const connection = require("../config/database");
 
 const getBanner = async () => {
-  const SQLQuery = `SELECT * FROM Banners`;
+  const SQLQuery = `SELECT * FROM banners`;
 
   try {
     const [results, fields] = await connection.query(SQLQuery);
@@ -17,7 +17,7 @@ const getBanner = async () => {
 };
 
 const getService = async () => {
-  const SQLQuery = `SELECT * FROM Services`;
+  const SQLQuery = `SELECT * FROM services`;
 
   try {
     const [results, fields] = await connection.query(SQLQuery);
@@ -33,7 +33,7 @@ const getService = async () => {
 };
 
 const checkService = async (body) => {
-  const SQLQuery = `SELECT * FROM Services WHERE service_code = ?`;
+  const SQLQuery = `SELECT * FROM services WHERE service_code = ?`;
   const params = [body.service_code];
 
   try {

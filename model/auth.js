@@ -18,7 +18,7 @@ const register = async (body) => {
 };
 
 const checkEmail = async (body) => {
-  const SQLQuery = `SELECT * FROM Users WHERE email = ?`;
+  const SQLQuery = `SELECT * FROM users WHERE email = ?`;
   const params = [body.email];
 
   try {
@@ -35,7 +35,7 @@ const checkEmail = async (body) => {
 };
 
 const updateProfile = async (body, emailJWT) => {
-  const SQLQuery = `UPDATE Users SET first_name = ?, last_name = ? WHERE email = ?`;
+  const SQLQuery = `UPDATE users SET first_name = ?, last_name = ? WHERE email = ?`;
   const params = [body.first_name, body.last_name, emailJWT.email];
   try {
     const [results, fields] = await connection.query(SQLQuery, params);

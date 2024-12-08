@@ -24,5 +24,5 @@ app.use(router);
 app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocuments));
 
 app.listen(port, () => {
-  console.log(`Server berjalan di http://localhost:${port}`);
+  console.log(`Server berjalan di port: ${port}`);
 });

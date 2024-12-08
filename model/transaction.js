@@ -6,7 +6,7 @@ const insertTransactionTopup = async (user_id, top_up_amount) => {
   const description = "Top Up Balance";
   const invoice = generateInvoice();
 
-  const SQLQuery = `INSERT INTO Transactions (user_id, invoice_number, service_code, service_name, transaction_type, total_amount, description ) VALUES (?,?,?,?,?,?,?)`;
+  const SQLQuery = `INSERT INTO transactions (user_id, invoice_number, service_code, service_name, transaction_type, total_amount, description ) VALUES (?,?,?,?,?,?,?)`;
   const params = [
     user_id,
     invoice,
@@ -34,7 +34,7 @@ const insertTransactionPayment = async (user_id, service) => {
   const transaction_type = "PAYMENT";
   const invoice = generateInvoice();
 
-  const SQLQuery = `INSERT INTO Transactions (user_id, invoice_number, service_code, service_name, transaction_type, total_amount, description ) VALUES (?,?,?,?,?,?,?)`;
+  const SQLQuery = `INSERT INTO transactions (user_id, invoice_number, service_code, service_name, transaction_type, total_amount, description ) VALUES (?,?,?,?,?,?,?)`;
   const params = [
     user_id,
     invoice,
@@ -61,7 +61,7 @@ const insertTransactionPayment = async (user_id, service) => {
 const getHistory = async (query, user_id) => {
   const limit = parseInt(query.limit) ?? 0;
   const offset = parseInt(query.offset) ?? 0;
-  const SQLQuery = `SELECT invoice_number,transaction_type,description,total_amount,created_at FROM Transactions WHERE user_id = ? LIMIT ? OFFSET ?`;
+  const SQLQuery = `SELECT invoice_number,transaction_type,description,total_amount,created_at FROM transactions WHERE user_id = ? LIMIT ? OFFSET ?`;
   const params = [user_id, limit, offset];
   try {
     const [results, fields] = await connection.query(SQLQuery, params);
