@@ -5,7 +5,9 @@ const register = async (body) => {
   const params = [body.email, body.first_name, body.last_name, body.password];
 
   try {
+    const conn = await connection.getConnection();
     const [results, fields] = await connection.execute(SQLQuery, params);
+    conn.release();
     return results;
   } catch (error) {
     console.log(error);
@@ -17,7 +19,9 @@ const checkEmail = async (body) => {
   const params = [body.email];
 
   try {
+    const conn = await connection.getConnection();
     const [results, fields] = await connection.execute(SQLQuery, params);
+    conn.release();
     return results;
   } catch (error) {
     console.log(error);
@@ -28,7 +32,9 @@ const updateProfile = async (body, emailJWT) => {
   const SQLQuery = `UPDATE users SET first_name = ?, last_name = ? WHERE email = ?`;
   const params = [body.first_name, body.last_name, emailJWT.email];
   try {
+    const conn = await connection.getConnection();
     const [results, fields] = await connection.execute(SQLQuery, params);
+    conn.release();
     return results;
   } catch (error) {
     console.log(error);

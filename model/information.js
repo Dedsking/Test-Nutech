@@ -4,7 +4,9 @@ const getBanner = async () => {
   const SQLQuery = `SELECT * FROM banners`;
 
   try {
+    const conn = await connection.getConnection();
     const [results, fields] = await connection.execute(SQLQuery);
+    conn.release();
     return results;
   } catch (error) {
     console.log(error);
@@ -20,7 +22,9 @@ const getService = async () => {
   const SQLQuery = `SELECT * FROM services`;
 
   try {
+    const conn = await connection.getConnection();
     const [results, fields] = await connection.execute(SQLQuery);
+    conn.release();
     return results;
   } catch (error) {
     console.log(error);
@@ -32,7 +36,9 @@ const checkService = async (body) => {
   const params = [body.service_code];
 
   try {
+    const conn = await connection.getConnection();
     const [results, fields] = await connection.execute(SQLQuery, params);
+    conn.release;
     return results;
   } catch (error) {
     console.log(error);
