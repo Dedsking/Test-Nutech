@@ -5,15 +5,10 @@ const updateBalance = async (result_amount, email) => {
   const params = [result_amount, email];
 
   try {
-    const [results, fields] = await connection.query(SQLQuery, params);
+    const [results, fields] = await connection.execute(SQLQuery, params);
     return results;
   } catch (error) {
     console.log(error);
-    return res.status(500).json({
-      status: 500,
-      message: "Something when wrong",
-      data: null,
-    });
   }
 };
 
@@ -21,15 +16,10 @@ const updateProfile = async (body, emailJWT) => {
   const SQLQuery = `UPDATE users SET first_name = ?, last_name = ? WHERE email = ?`;
   const params = [body.first_name, body.last_name, emailJWT.email];
   try {
-    const [results, fields] = await connection.query(SQLQuery, params);
+    const [results, fields] = await connection.execute(SQLQuery, params);
     return results;
   } catch (error) {
     console.log(error);
-    return res.status(500).json({
-      status: 500,
-      message: "Something when wrong",
-      data: null,
-    });
   }
 };
 
@@ -37,15 +27,10 @@ const updateProfileImage = async (file_path, emailJWT) => {
   const SQLQuery = `UPDATE users SET profile_image = ? WHERE email = ?`;
   const params = [file_path, emailJWT.email];
   try {
-    const [results, fields] = await connection.query(SQLQuery, params);
+    const [results, fields] = await connection.execute(SQLQuery, params);
     return results;
   } catch (error) {
     console.log(error);
-    return res.status(500).json({
-      status: 500,
-      message: "Something when wrong",
-      data: null,
-    });
   }
 };
 

@@ -4,7 +4,7 @@ const getBanner = async () => {
   const SQLQuery = `SELECT * FROM banners`;
 
   try {
-    const [results, fields] = await connection.query(SQLQuery);
+    const [results, fields] = await connection.execute(SQLQuery);
     return results;
   } catch (error) {
     console.log(error);
@@ -20,15 +20,10 @@ const getService = async () => {
   const SQLQuery = `SELECT * FROM services`;
 
   try {
-    const [results, fields] = await connection.query(SQLQuery);
+    const [results, fields] = await connection.execute(SQLQuery);
     return results;
   } catch (error) {
     console.log(error);
-    return res.status(500).json({
-      status: 500,
-      message: "Something when wrong",
-      data: null,
-    });
   }
 };
 
@@ -37,15 +32,10 @@ const checkService = async (body) => {
   const params = [body.service_code];
 
   try {
-    const [results, fields] = await connection.query(SQLQuery, params);
+    const [results, fields] = await connection.execute(SQLQuery, params);
     return results;
   } catch (error) {
     console.log(error);
-    return res.status(500).json({
-      status: 500,
-      message: "Something when wrong",
-      data: null,
-    });
   }
 };
 

@@ -18,7 +18,7 @@ const insertTransactionTopup = async (user_id, top_up_amount) => {
   ];
 
   try {
-    const [results, fields] = await connection.query(SQLQuery, params);
+    const [results, fields] = await connection.execute(SQLQuery, params);
     return results;
   } catch (error) {
     console.log(error);
@@ -46,7 +46,7 @@ const insertTransactionPayment = async (user_id, service) => {
   ];
 
   try {
-    const [results, fields] = await connection.query(SQLQuery, params);
+    const [results, fields] = await connection.execute(SQLQuery, params);
     return results;
   } catch (error) {
     console.log(error);
@@ -64,15 +64,10 @@ const getHistory = async (query, user_id) => {
   const SQLQuery = `SELECT invoice_number,transaction_type,description,total_amount,created_at FROM transactions WHERE user_id = ? LIMIT ? OFFSET ?`;
   const params = [user_id, limit, offset];
   try {
-    const [results, fields] = await connection.query(SQLQuery, params);
+    const [results, fields] = await connection.execute(SQLQuery, params);
     return results;
   } catch (error) {
     console.log(error);
-    return res.status(500).json({
-      status: 500,
-      message: "Something when wrong",
-      data: null,
-    });
   }
 };
 
