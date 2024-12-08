@@ -5,8 +5,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const swaggerUi = require("swagger-ui-express");
+const path = require("path");
 const YAML = require("yamljs");
-const swaggerDocuments = YAML.load("./swagger/swagger.yml");
+const swaggerDocuments = YAML.load(path.join(__dirname, "swagger/swagger.yml"));
 
 const router = require("./routes/index");
 
@@ -26,3 +27,5 @@ app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocuments));
 app.listen(port, () => {
   console.log(`Server berjalan di port: ${port}`);
 });
+
+module.exports = app;
