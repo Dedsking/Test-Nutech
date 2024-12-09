@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const multer = require("multer");
-const path = require("path");
+// const path = require("path");
+const fs = require("fs");
 
 const middlewareAuth = require("../middleware/middlewareAuth");
 const membership = require("../controller/membershipController");
@@ -9,7 +10,10 @@ const transaction = require("../controller/transactionController");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "public/uploads/"); // Folder tujuan penyimpanan
+    const { id } = req.user;
+    const path = `./public/uploads/gallery/${id}`;
+    fs.mkdirSync(path, { recursive: true });
+    cb(null, path); // Folder tujuan penyimpanan
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
