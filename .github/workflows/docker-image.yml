@@ -1,0 +1,20 @@
+name: Build and push into Docker hub
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish_image:
+    runs_on: ubuntu-latets
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: build image
+        uses: docker build -t nodejs/test-nutech-api:latest -f Dockerfile.dev
+      - name: push image to docker hub
+        run: |
+          docker login --u ${{ secret.DOCKER_HUB_USERNAME }} -p ${{ secret.DOCKER_HUB_TOKEN }}
+          dcoker push nodejs/test-nutech-api:latest
