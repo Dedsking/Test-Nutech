@@ -12,7 +12,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
       - name: build image
-        uses: docker build -t ${{ secret.DOCKER_HUB_USERNAME }}/test-nutech-api:latest -f Dockerfile.dev
+        run: docker build -t ${{ secret.DOCKER_HUB_USERNAME }}/test-nutech-api:latest -f Dockerfile.dev
       - name: push image to docker hub
         run: |
           docker login --u ${{ secret.DOCKER_HUB_USERNAME }} -p ${{ secret.DOCKER_HUB_TOKEN }}
